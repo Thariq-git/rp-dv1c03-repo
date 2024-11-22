@@ -40,14 +40,13 @@ pipeline {
             }
         }
 
-        // Stage 3 (Parallel)
-        stage('ST3-Parallel-3133276f') {
-            parallel {
+        // Stage 3A
                 stage('ST3A-3133276f') {
                     steps {
                         echo 'ST3A-3133276f: X-Site Scripting (XSS) Test Completed and Report Generated.'
                     }
                 }
+        // Stage 3B
                 stage('ST3B-3133276f') {
                     steps {
                         echo 'ST3B-3133276f: SQL Injection (SQLI) Test Completed and Report Generated.'
