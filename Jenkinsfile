@@ -58,6 +58,42 @@ pipeline {
             }
         }
 
-        // Additional stages can be added here
+        // Stage 4
+        stage('ST4-3133276f') {
+            steps {
+                echo 'ST4-3133276f: Security reports are checked.'
+            }
+        }
+
+        // Stage 5
+        stage('ST5-3133276f') {
+            steps {
+                script {
+                    def userInput = input(message: "Hello 3133276f, permission to proceed to the next phase?",
+                        ok: 'Proceed',
+                        parameters: [choice(name: 'Action', choices: 'Proceed\nAbort', description: 'Select action')])
+
+                    if (userInput == 'Proceed') {
+                        echo 'ST5-3133276f: Approve to proceed to next phase.'
+                    } else {
+                        echo 'ST5-3133276f: Pipeline aborted by user choice.'
+                        currentBuild.result = 'ABORTED'
+                        error('Pipeline aborted by user.')
+                    }
+                }
+            }
+        }
+
+        // Stage 6
+        stage('ST6-3133276f') {
+            when {
+                expression {
+                    return currentBuild.result != 'ABORTED'
+                }
+            }
+            steps {
+                echo 'ST6-3133276f: Ready for next phase.'
+            }
+        }
     }
 }
